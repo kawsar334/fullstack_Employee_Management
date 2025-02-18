@@ -1,5 +1,4 @@
 # Backend Project  
-
 This repository contains the backend implementation of the project. It provides the necessary APIs and logic to power the frontend application and manage data efficiently.  
 
 ## Links  
@@ -46,12 +45,6 @@ This repository contains the backend implementation of the project. It provides 
 
 ## Technologies
 
-- **Node.js**: JavaScript runtime environment for building the backend API.
-- **Express.js**: Web framework for Node.js used to build the API routes.
-- **JWT (JSON Web Tokens)**: Used for user authentication and authorization.
-- **MongoDB**: NoSQL database for storing user, payment, and employee data.
-- **Mongoose**: ODM (Object Data Modeling) library for MongoDB, used for interacting with the database.
-- **Bcrypt.js**: Password hashing library used for securely storing and verifying user passwords.
 - **Google OAuth**: Enables Google login for users to authenticate without a password.
 - **Axios**: For handling HTTP requests between the frontend and backend (used for communication in some parts of the application).
 - **Dotenv**: For managing environment variables (e.g., JWT secret, database URL).
