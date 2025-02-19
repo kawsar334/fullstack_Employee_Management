@@ -9,7 +9,8 @@ import Loader from '../../components/Loader';
 import { ThemeContext } from '../../context/ThemeProvider';
 
 const AdminEmployeeListComponent = () => {
-     const { isDarkMode, toggleTheme } = useContext(ThemeContext)
+     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+
     const [loading, setLoading] = useState(false)
     const [employees, setEmployees] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -131,10 +132,17 @@ const AdminEmployeeListComponent = () => {
     const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    const handleFilter =()=>{
+        const filteredEmployees = [...employees].sort((a, b) => a.salary - b.salary);
+        setEmployees(filteredEmployees);
+    }
     return (
         <div className={`md:w-[1000px]  w-full px-0 md:px-4 py-6 overflow-x-scroll  md:overflow-x-auto ${isDarkMode?"bg-dark":"bg-white"}`}>
             <div className="text-center mb-4 flex justify-center items-center gap-4">
                 <h2 className="text-2xl font-semibold text-center mb-4">All Employees</h2>
+
+                <button className="border bg-text px-2 py-1 rounded" onClick={handleFilter}>Sort by Salary </button>
                 <button
                     className="bg-main text-white px-4 py-2 rounded-md  flex items-center gap-2"
                     onClick={toggleViewMode}
