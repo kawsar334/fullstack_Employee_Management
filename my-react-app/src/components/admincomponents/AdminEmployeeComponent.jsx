@@ -139,10 +139,10 @@ const AdminEmployeeListComponent = () => {
     }
     return (
         <div className={`md:w-[1000px]  w-full px-0 md:px-4 py-6 overflow-x-scroll  md:overflow-x-auto ${isDarkMode?"bg-dark":"bg-white"}`}>
-            <div className="text-center mb-4 flex justify-center items-center gap-4">
+            <div className="text-center mb-4 flex justify-center items-center flex-wrap gap-5 ">
                 <h2 className="text-2xl font-semibold text-center mb-4">All Employees</h2>
 
-                <button className="border bg-text px-2 py-1 rounded" onClick={handleFilter}>Sort by Salary </button>
+                <button className="border bg-text px-2 py-2 rounded" onClick={handleFilter}>Sort by Salary </button>
                 <button
                     className="bg-main text-white px-4 py-2 rounded-md  flex items-center gap-2"
                     onClick={toggleViewMode}
