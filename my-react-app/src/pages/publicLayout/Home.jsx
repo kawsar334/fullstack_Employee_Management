@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import Features from '../../Features/Features';
 import FAQ from './FAQ';
 import Newsletter from '../../components/Newsletter/Newsletter';
+import PerformanceReviews from '../../components/PerformanceReviews/PerformanceReviews';
+import EmployeeBenefits from '../../components/EmployeeBenefits/EmployeeBenefits';
 
 const Home = ({ user }) => {
 
@@ -43,18 +45,15 @@ const Home = ({ user }) => {
   return (
     <div>
       <Banner/>
-
-      
       <Services/>   
-     
       <Testimonials/>
       <Features/>
+      <PerformanceReviews/>
+      <EmployeeBenefits/>
       <FAQ/>
       <AboutUs/>
-
       <CallToAction/>
       <Newsletter/>
-
     </div>
   );
 };

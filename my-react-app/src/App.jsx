@@ -26,6 +26,8 @@ import Analytics from './pages/hrLayout/Analytics';
 import AdminEmployeeList from './pages/addminlayout/AdminPageEmployee';
 import Profile from './pages/profile/Profile';
 import ProfilePage from './pages/profile/Profile';
+import PrivacyPolicy from './pages/publicLayout/Privacy';
+import Help from './pages/publicLayout/Help';
 
 
 
@@ -128,6 +130,29 @@ function App() {
           path: "/profile",
           element: (
             <ProfilePage />
+          )
+
+
+        },
+
+        {
+          path: "/privacy",
+          element: (
+            <ProtectedRoute>
+
+              <PrivacyPolicy />
+            </ProtectedRoute>
+          )
+
+
+        },
+        {
+          path: "/help",
+          element: (
+            <ProtectedRoute>
+
+              <Help />
+            </ProtectedRoute>
           )
 
 

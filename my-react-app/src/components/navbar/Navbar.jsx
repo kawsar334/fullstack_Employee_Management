@@ -6,6 +6,7 @@ import { AuthContext } from '../../context/AuthProviders';
 import UserRole from '../../essentialRoutes/UserRole';
 import { Link, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeProvider';
+import Dropdown from '../dropdown/Dropdown';
 
 const Navbar = () => {
   const { userRole } = UserRole();
@@ -22,7 +23,7 @@ const Navbar = () => {
         <Link to="/" className="text-3xl font-bold text-main ml-3 flex items-center gap-2 "><img  className='w-10 h-10' src="https://cdn.fileplanet.com/anic/iss-thumbs/naukrigulf.png" alt="" /> Noukori <span className="text-">Gulf</span></Link>
         <div className="hidden md:flex space-x-6 items-center">
           <Link to="/" className="text-lg hover:text-gray-300">Home</Link>
-          <Link to="/contact" className="text-lg hover:text-gray-300">Contact</Link>
+         
           {userRole === 'employee' && user && (
             // <Link to="/dashboard" className="text-lg hover:text-gray-300">Dashboard</Link>
             <></>
@@ -35,8 +36,8 @@ const Navbar = () => {
             </>
           ) : (
             <div className="flex items-center space-x-3">
-         
-                <Link to="/profile" className={` px-2 rounded ${isActive("/profile")}`}>profile</Link>
+                
+                <Dropdown/>
                 {userRole === 'admin' && (
                   <Link to="/dashboard" className="text-lg bg-main px-2 rounded text-white hover:text-gray-300">Dashboard</Link>
                 )}
