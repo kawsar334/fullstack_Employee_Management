@@ -3,52 +3,33 @@ import { ThemeContext } from "../../context/ThemeProvider";
 
 const FAQ = () => {
 
-    const { isDarkMode } = useContext(ThemeContext)
+    const { isDarkMode } = useContext(ThemeContext);
+
     const faqs = [
         {
-            id: 1,
-            question: "How do I find a tutor?",
-            answer: "You can find a tutor by browsing our 'Find Tutors' section and selecting a category or language.",
+            question: "What is the Employee Management System?",
+            answer:
+                "The Employee Management System helps organizations track employee records, attendance, performance, and more in a centralized platform.",
         },
         {
-            id: 2,
-            question: "What if I am not satisfied with my tutor?",
-            answer: "We encourage you to contact us if you're not satisfied with your tutor, and we will help you find a better match.",
+            question: "How do I add a new employee?",
+            answer:
+                "To add a new employee, go to the 'Employees' section, click 'Add Employee,' fill in the required details, and submit the form.",
         },
         {
-            id: 3,
-            question: "Is there a trial session available?",
-            answer: "Yes, many tutors offer a free or discounted trial session. Check the tutor's profile for more details.",
+            question: "Can I edit an employee’s details after adding them?",
+            answer:
+                "Yes, you can edit employee details by selecting the employee profile and clicking the 'Edit' button.",
         },
         {
-            id: 4,
-            question: "How do I contact support?",
-            answer: "You can reach out to our support team through the 'Contact Us' page or directly via email.",
+            question: "Does this system support role-based access?",
+            answer:
+                "Yes, admins can assign different roles (e.g., Manager, HR, Employee) with specific permissions.",
         },
         {
-            id: 5,
-            question: "Can I change my tutor?",
-            answer: "Yes, you can change your tutor anytime. Just contact us for assistance with the process.",
-        },
-        {
-            id: 6,
-            question: "Are the tutors certified?",
-            answer: "All our tutors are highly qualified, and many are certified in their respective fields.",
-        },
-        {
-            id: 7,
-            question: "Can I book a tutor for group lessons?",
-            answer: "Yes, you can book tutors for group lessons. You can discuss the details with the tutor beforehand.",
-        },
-        {
-            id: 8,
-            question: "What is the refund policy?",
-            answer: "If you're not satisfied with the lesson, we offer a refund within 24 hours after the session.",
-        },
-        {
-            id: 9,
-            question: "Do I need any special software to attend the lessons?",
-            answer: "You just need a reliable internet connection and a video conferencing tool like Zoom or Skype.",
+            question: "Is the system mobile-friendly?",
+            answer:
+                "Yes, the Employee Management System is fully responsive and works on desktops, tablets, and mobile devices.",
         },
     ];
 
@@ -59,9 +40,9 @@ const FAQ = () => {
     };
 
     return (
-        <section className=" py-12 my-[100px] px-4">
-            <h2 className={`${isDarkMode ? "text-3xl font-bold text-center text-white mb-8" : "text-3xl font-bold text-center text-gray-800 mb-8"}`}>Frequently Asked Questions</h2>
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+        <section className={`py-12  px-4 ${isDarkMode?"bg-dark text-white":"bg-white text-dark"}`}>
+            <h2 className={`${isDarkMode ? "text-3xl font-bold text-center bg-dark text-white mb-8" : "text-3xl font-bold text-center text-gray-800 mb-8"}`}>Frequently Asked Questions</h2>
+            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8 bg-transparent">
                 {faqs?.map((faq, index) => (
                     <div key={faq.id} className="mb-4  h-max ">
                         <button

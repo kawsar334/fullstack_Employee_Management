@@ -1,11 +1,13 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Loader from '../../components/Loader';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/Sidebar';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 function Payroll() {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext)
     const [employees, setEmployees] = useState([]);
     const [loading, setLoading] = useState(false);
     const [totalPages, setTotalPages] = useState(0);
@@ -69,9 +71,9 @@ function Payroll() {
     }
 
     return (
-        <div className='flex justify-start items-start'>
+        <div className={`flex justify-start items-start ${isDarkMode ? "bg-dark text-white" : "bg-white text-dark"}`}>
             <Sidebar />
-            <div className='overflow-auto h-max'>
+            <div className={`overflow-auto h-max ml-10 `}>
                 <h1 className='text-center py-5 text-2xl font-semibold'>Payroll Management</h1>
 
              

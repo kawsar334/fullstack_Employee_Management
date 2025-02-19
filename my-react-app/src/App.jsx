@@ -25,6 +25,7 @@ import Payroll from './pages/addminlayout/Payrolls';
 import Analytics from './pages/hrLayout/Analytics';
 import AdminEmployeeList from './pages/addminlayout/AdminPageEmployee';
 import Profile from './pages/profile/Profile';
+import ProfilePage from './pages/profile/Profile';
 
 
 
@@ -123,6 +124,14 @@ function App() {
 
         },
 
+        {
+          path: "/profile",
+          element: (
+            <ProfilePage />
+          )
+
+
+        },
         {
           path: "/login",
           element: (

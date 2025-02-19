@@ -1,9 +1,11 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const ProgressComponent = () => {
+     const { isDarkMode, toggleTheme } = useContext(ThemeContext)
     const [employees, setEmployees] = useState([]);
     const [workRecords, setWorkRecords] = useState([]);
     const [originalWorkRecords, setOriginalWorkRecords] = useState([]); 
@@ -62,14 +64,14 @@ const ProgressComponent = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="w-full mx-auto p-4">
+        <div className={`w-full mx-auto p-4 ${isDarkMode?"bg-dark text-white":"text-dark bg-white"}`}>
             <div className="mb-4 flex gap-1 md:gap-4 flex-col md:flex-row flex-wrap ">
                 <select
                     value={selectedEmployee?._id || ''}
                     onChange={(e) =>
                         setSelectedEmployee(employees.find(emp => emp._id === e.target.value))
                     }
-                    className="p-2 border rounded"
+                    className="p-2 border rounded bg-white text-teal"
                 >
                     <option value="">Select Employee</option>
                     {employees.map((employee) => (
@@ -84,7 +86,7 @@ const ProgressComponent = () => {
                     onChange={(e) =>
                         setSelectedMonth(months.find(month => month.month === e.target.value))
                     }
-                    className="p-2 border rounded"
+                    className="p-2 border rounded bg-white text-text"
                 >
                     <option value="">Select Month</option>
                     {months.map((month, i) => (

@@ -1,13 +1,15 @@
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-modal';
 import Loader from '../../components/Loader';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const AdminEmployeeListComponent = () => {
+     const { isDarkMode, toggleTheme } = useContext(ThemeContext)
     const [loading, setLoading] = useState(false)
     const [employees, setEmployees] = useState([]);
     const [showModal, setShowModal] = useState(false);
@@ -122,14 +124,7 @@ const AdminEmployeeListComponent = () => {
         },600)
     };
 
-    // if(loading){
-    //     return(
-    //         <div className='flex justify-center  items-center w-screen h-[500px]'>
-
-    //             <Loader/>
-    //         </div>
-    //     )
-    // }
+  
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -137,7 +132,7 @@ const AdminEmployeeListComponent = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
     return (
-        <div className="md:w-[1000px]  w-full px-0 md:px-4 py-6 overflow-x-scroll  md:overflow-x-auto     ">
+        <div className={`md:w-[1000px]  w-full px-0 md:px-4 py-6 overflow-x-scroll  md:overflow-x-auto ${isDarkMode?"bg-dark":"bg-white"}`}>
             <div className="text-center mb-4 flex justify-center items-center gap-4">
                 <h2 className="text-2xl font-semibold text-center mb-4">All Employees</h2>
                 <button
@@ -159,7 +154,7 @@ const AdminEmployeeListComponent = () => {
             </div>
             <div className=" w-screen md:w-full">
                 {viewMode === 'table' ? <table className="table-auto w-full    border border-gray-200 shadow-sm text-center text-sm lg:text-base">
-                    <thead className="bg-gray-100">
+                    <thead className={`${isDarkMode ? "bg-dark" :"bg-gray-100"}`}>
                         <tr>
                             <th className="px-4 py-2 border">Name</th>
                             <th className="px-4 py-2 border">Designation</th>
@@ -170,7 +165,7 @@ const AdminEmployeeListComponent = () => {
                     </thead>
                     <tbody>
                         {employees.length > 0 ? currentEmployees.map((employee) => (
-                            <tr key={employee._id} className="hover:bg-gray-50">
+                            <tr key={employee._id} className={`hover:bg-gray-50 text-teal transition-all duration-700`}>
                                 <td className="px-4 py-2 border">{employee?.name}</td>
                                 <td className="px-4 py-2 border">{employee.designation || "Not Found"}</td>
                                 <td className="px-4 py-2 border">
@@ -211,7 +206,7 @@ const AdminEmployeeListComponent = () => {
                                             className="w-[130px] border rounded-md px-2 py-1 text-center"
                                             required
                                         />
-                                        <button type='submit' className='border bg-teal p-1 rounded'>Update</button>
+                                        <button type='submit' className='border bg-teal text-white p-1 rounded'>Update</button>
                                    </form>
                                 </td>
                             </tr>
@@ -237,7 +232,7 @@ const AdminEmployeeListComponent = () => {
                                                 className="w-[60%] border rounded-md py-1 px-2"
                                                 required
                                             />
-                                            <button type="submit" className="border p-1 rounded text-[13px] w-max bg-[teal] text-white">Update </button>
+                                            <button type="submit" className="border p-1 rounded text-[13px] w-max bg-main  text-white">Update </button>
                                         </form>
                                         <div className="mt-4 flex gap-2 ">
                                             {/* {!employee.isFired&&<div>Unblock</div> } */}
@@ -271,7 +266,7 @@ const AdminEmployeeListComponent = () => {
 
                                                 </>
                                             ) : (
-                                                <button className="bg-teal py-1 w-max  text-white text-[13px]  rounded px-2 cursor-pointer " onClick={() => unfireEmployee(employee)}>Unblock</button>
+                                                <button className="bg-teal  py-1 w-max  text-white text-[13px]  rounded px-2 cursor-pointer " onClick={() => unfireEmployee(employee)}>Unblock</button>
                                             )}
                                             
                                         </div>
@@ -285,7 +280,7 @@ const AdminEmployeeListComponent = () => {
                 </>}
             </div>
 
-            {/* Modal for confirmation */}
+            {/* Modal */}
             <Modal
                 isOpen={showModal}
                 onRequestClose={() => setShowModal(false)}

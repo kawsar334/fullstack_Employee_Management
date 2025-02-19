@@ -7,6 +7,8 @@ import AboutUs from '../../components/AboutUs/AboutUs';
 import CallToAction from '../../CallToAction/CallToAction';
 import { toast } from 'react-toastify';
 import Features from '../../Features/Features';
+import FAQ from './FAQ';
+import Newsletter from '../../components/Newsletter/Newsletter';
 
 const Home = ({ user }) => {
 
@@ -47,10 +49,11 @@ const Home = ({ user }) => {
      
       <Testimonials/>
       <Features/>
-      
+      <FAQ/>
       <AboutUs/>
 
       <CallToAction/>
+      <Newsletter/>
 
     </div>
   );

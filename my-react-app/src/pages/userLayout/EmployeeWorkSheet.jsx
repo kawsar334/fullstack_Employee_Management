@@ -1,7 +1,5 @@
 
-
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,8 +7,10 @@ import Modal from 'react-modal';
 import Loader from '../../components/Loader';
 import { toast } from 'react-toastify';
 import Sidebar from '../../components/sidebar/Sidebar';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const EmployeeWorkSheet = () => {
+     const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     const [loading, setLoading] = useState(false)
     const [modalData, setModalData] = useState(null);
     const [tasks, setTasks] = useState([]);
@@ -90,13 +90,13 @@ const EmployeeWorkSheet = () => {
     };
 
     if(loading){
-        return <div className='w-full flex justify-center items-center h-[500px]'><Loader/></div>
+        return <div className='w-full flex justify-center items-center h-[500px] '><Loader/></div>
     }
 
     return (
-       <div className='flex justify-start items-start h-[600px]  overflow-x-auto   '>
+        <div className={`flex justify-start items-start  overflow-x-auto ${isDarkMode ?"bg-dark ":"bg-white text-dark"}`}>
             <Sidebar/>
-            <div className=" px-4 bg-gray-100 p-3 ">
+            <div className={`px-4 ${isDarkMode?"bg-dark text-white":'bg-white text-dark'} p-3`}>
                 <h1 className="text-2xl font-semibold text-gray-700 mb-1">Work Sheet</h1>
                 <form
                     onSubmit={handleSubmit}
@@ -132,8 +132,8 @@ const EmployeeWorkSheet = () => {
                 {tasks.length === 0 ? (<div className='w-full h-[400px] justify-center items-center flex  text-3xl '>
 
                     <h1>No work added yet</h1>
-                </div>) : <table className="w-full  md:mt-1 bg-white shadow-md rounded-lg ">
-                    <thead className="bg-main text-white text-start">
+                </div>) : <table className={`w-full  md:mt-1 ${isDarkMode ?"bg-dark text-white" :"bg-white text-dark"} shadow-md rounded-lg`}>
+                        <thead className={`bg-main text-white text-start`}>
                         <tr>
                             <th className="p-2 text-start">Task</th>
                             <th className="p-2 text-start">Hours Worked</th>

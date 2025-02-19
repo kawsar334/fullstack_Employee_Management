@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import Sidebar from "../../components/sidebar/Sidebar";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 
 const ProfilePage = () => {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext)
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
-
     // Fetch profile data
     useEffect(() => {
         const fetchProfile = async () => {
@@ -36,33 +38,32 @@ const ProfilePage = () => {
     }
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 py-8 px-4">
-            {/* Profile Card */}
-            <div className="bg-white shadow-md rounded-lg p-6 w-full max-w-md">
+        <div className={`flex  items-center min-h-screen ${isDarkMode?"bg-dark text-white":"bg-white text-dark"}  gap-10`}>
+
+            <Sidebar/>
+            <div className={`${isDarkMode ? "bg-dark text-white " : "bg-white text-dark"} border border-[rgba(255,255,255,0.1)] shadow-md rounded-lg p-6 w-full max-w-md mx-auto`}>
                 <div className="flex flex-col items-center">
                     <img
                         src={profile.photoURL || "https://via.placeholder.com/150"}
                         alt="Profile"
                         className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
                     />
-                    {/* Name */}
-                    <h2 className="mt-4 text-xl font-semibold text-gray-800">{profile.name}</h2>
-                    {/* Role */}
-                    <p className="text-gray-600">{profile.role || "User"}</p>
+                    <h2 className="mt-4 text-xl font-semibold  capitalize">{profile.name}</h2>
+                    <p className="text-gray-600">Role: {profile.role || "User"}</p>
                 </div>
-                {/* Details */}
                 <div className="mt-6">
                     <div className="flex justify-between py-2 border-b">
                         <span className="text-gray-500">Email:</span>
-                        <span className="text-gray-800">{profile.email}</span>
+                        <span className="">{profile.email}</span>
                     </div>
                     <div className="flex justify-between py-2 border-b">
                         <span className="text-gray-500">Phone:</span>
-                        <span className="text-gray-800">{profile.phone || "N/A"}</span>
+                        <span className="">{profile.phone || "N/A"}</span>
+                        
                     </div>
                     <div className="flex justify-between py-2">
                         <span className="text-gray-500">Joined:</span>
-                        <span className="text-gray-800">
+                        <span className="">
                             {new Date(profile.createdAt).toLocaleDateString()}
                         </span>
                     </div>

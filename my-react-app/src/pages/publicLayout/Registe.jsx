@@ -6,20 +6,22 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthProviders';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const Registration = ({ toggleToLogin }) => {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [designation, setDesignation] = useState("")
-    const [bankAccountNo, setbankAccountNo] =useState("");
+    const [bankAccountNo, setbankAccountNo] = useState("");
     const [salary, setSalary] = useState(null);
- const [vissible, setVissible] = useState(false)
-   
+    const [vissible, setVissible] = useState(false)
+
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('employee');
-    const [photo, setPhoto] = useState(null); 
+    const [photo, setPhoto] = useState(null);
     const [errors, setErrors] = useState('');
-    const navigate= useNavigate()
+    const navigate = useNavigate()
     const { createUser, signInWithGoogle } = useContext(AuthContext)
     const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dmvmzwqkw/image/upload';
     const CLOUDINARY_UPLOAD_PRESET = 'employee';
@@ -47,7 +49,7 @@ const Registration = ({ toggleToLogin }) => {
         try {
             const response = await axios.post(CLOUDINARY_URL, formData);
             console.log(response.data.secure_url)
-            return response.data.secure_url; 
+            return response.data.secure_url;
         } catch (error) {
             console.error('Cloudinary upload error:', error);
             toast.error('Failed to upload photo.');
@@ -80,7 +82,7 @@ const Registration = ({ toggleToLogin }) => {
     }
 
     return (
-        <div className="flex justify-center items-center flex-col capitalize bg-gradient-to-tr from-main to-transparent ">
+        <div className={`flex justify-center items-center flex-col capitalize bg-gradient-to-tr  ${isDarkMode ? "bg-dark text-white" : "bg-white text-dark"}`}>
             <div className=' w-[90%]  md:w-max  my-10 rounded md:p-6  shadow-md border'>
                 <h1 className='w-full text-center text-2xl my-1'>Register</h1>
                 <form onSubmit={handleRegistration} className='flex mx-auto w-[90%] md:w-[500px] justify-center items-center flex-col gap-3'>
@@ -123,7 +125,7 @@ const Registration = ({ toggleToLogin }) => {
                                 className='w-full py-2 px-2 rounded border placeholder:text-[lightgray]'
                             />
                             {vissible ? <i className="fas fa-eye cursor-pointer absolute right-[30px] top-[40px]" onClick={() => setVissible(!vissible)}></i> :
-                                <i className="fas fa-eye-slash  cursor-pointer absolute right-[30px] top-[40px]" onClick={() => setVissible(!vissible)}></i>} 
+                                <i className="fas fa-eye-slash  cursor-pointer absolute right-[30px] top-[40px]" onClick={() => setVissible(!vissible)}></i>}
                         </div>
                         <div className='w-full flex justify-start items-start flex-col  p-1'>
                             <label>Designation:</label>
@@ -163,18 +165,18 @@ const Registration = ({ toggleToLogin }) => {
                         </div>
                     </div>
 
-                        <div className='w-full flex justify-start items-start flex-col  p-1'>
-                            <label>Role:</label>
-                            <select value={role} onChange={(e) => setRole(e.target.value)}
-                                className='w-full py-2 px-2 rounded border '
-                            >
-                                <option value="employee">Employee</option>
-                                <option value="hr">HR</option>
-                                {/* <option value="admin">Admin</option> */}
-                            </select>
-                        </div>
+                    <div className='w-full flex justify-start items-start flex-col  p-1'>
+                        <label>Role:</label>
+                        <select value={role} onChange={(e) => setRole(e.target.value)}
+                            className='w-full py-2 px-2 rounded border '
+                        >
+                            <option value="employee">Employee</option>
+                            <option value="hr">HR</option>
+                            {/* <option value="admin">Admin</option> */}
+                        </select>
+                    </div>
 
-                    
+
                     <div className='w-full flex justify-start items-start flex-col  p-1'>
                         <label>Profile Picture:</label>
                         <input
@@ -196,11 +198,11 @@ const Registration = ({ toggleToLogin }) => {
                     <button type="submit" className='border  w-full py-2 px-4 rounded bg-text text-white'>Register</button>
                 </form>
 
-                <button onClick={handleGoogleLogin}  className='border   py-2 px-4 rounded bg-main  text-text my-3 w-max '>Login with google</button>
+                <button onClick={handleGoogleLogin} className='border   py-2 px-4 rounded bg-main  text-text my-3 w-max '>Login with google</button>
                 <NavLink to="/login" className="text-end w-full block my-2" >
                     Already have an account? <span className='text-blue-400' >Login here</span>
                 </NavLink>
-           </div>
+            </div>
         </div>
     );
 };

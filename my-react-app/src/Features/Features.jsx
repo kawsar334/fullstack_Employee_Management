@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/ThemeProvider";
 
 // Feature data
 const featuresData = [
@@ -29,15 +30,17 @@ const featuresData = [
 ];
 
 const Features = () => {
+
+      const { isDarkMode } = useContext(ThemeContext)
     return (
-        <section className="py-16 bg-gray-50" data-aos="fade-up">
+        <section className={`py-16  ${isDarkMode ? "bg-dark" :"bg-gray-50"}`} data-aos="fade-up">
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8">Why Choose Us?</h2>
+                <h2 className={`text-3xl font-bold ${isDarkMode ? "text-white" :"text-gray-800"} mb-8`}>Why Choose Us?</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     {featuresData.map((feature) => (
                         <div key={feature.id} className="bg-white p-6 rounded-lg shadow-lg">
                             <div className="text-4xl text-indigo-600 mb-4">{feature.icon}</div>
-                            <h3 className="text-xl font-semibold text-text mb-2">{feature.title}</h3>
+                            <h3 className="text-xl font-semibold text-main mb-2">{feature.title}</h3>
                             <p className="text-gray-500 first-letter:text-main first-letter:text-2xl">{feature.description}</p>
                         </div>
                     ))}

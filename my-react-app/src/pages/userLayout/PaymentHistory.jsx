@@ -1,14 +1,15 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Sidebar from '../../components/sidebar/Sidebar';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const PaymentHistory = () => {
+    const { isDarkMode, toggleTheme } = useContext(ThemeContext);
     const [payments, setPayments] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
 
     const [hasMore, setHasMore] = useState(true);
     const fetchPayments = async (page = 1) => {
@@ -37,7 +38,7 @@ const PaymentHistory = () => {
     };
 
     return (
-        <div className="flex justify-start items-start  ">
+        <div className={`flex justify-start items-start ${isDarkMode?"bg-dark text-white":"bg-white text-dark"}`}>
             <Sidebar />
             <div className="w-full my-3 px-10  overflow-x-auto">
                 {payments.length !== 0 && (

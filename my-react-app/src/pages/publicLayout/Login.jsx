@@ -3,8 +3,10 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/AuthProviders';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 const Login = ({ toggleToRegister }) => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
   const { signInWithGoogle, signInUser, setUser } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +46,7 @@ const Login = ({ toggleToRegister }) => {
   }
 
   return (
-    <div className="flex justify-center items-center flex-col  mx-auto h-screen  bg-gradient-to-r from-main to-transparent " 
+    <div className={`flex justify-center items-center flex-col  mx-auto h-screen  ${isDarkMode?"bg-dark text-white":"bg-white text-dark"}`}
     
     >
       <div className='flex justify-center items-center gap-2 flex-col bg- rounded p-7 my-10 border shadow  w-[95%] md:w-max '>
@@ -79,7 +81,7 @@ const Login = ({ toggleToRegister }) => {
           <button type="submit" className='w-full border px-3 py-2 rounded  bg-main text-white'>Login</button>
         </form>
 
-        <button onClick={handleGoogleLogin} className='border hover:bg-main hover:text-text transition-all duration-500  px-4 py-2 text-white w-[93%]   rounded'>
+        <button onClick={handleGoogleLogin} className='border hover:bg-main hover:text-text transition-all duration-500  px-4 py-2 text-main w-[93%]   rounded'>
           Login with Google
         </button>
         <NavLink to="/register" >

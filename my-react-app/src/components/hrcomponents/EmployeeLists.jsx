@@ -6,9 +6,11 @@ import Sidebar from '../../components/sidebar/Sidebar';
 import StripeCheckout from 'react-stripe-checkout';
 import { AuthContext } from '../../context/AuthProviders';
 import Stripe from 'stripe';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 
 const EmployeeList = () => {
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext)
   const [employees, setEmployees] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState(null);
@@ -16,20 +18,20 @@ const EmployeeList = () => {
   const [salary, setSalary] = useState(0)
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
-  const {user,} = useContext(AuthContext);
+  const { user, } = useContext(AuthContext);
   const [amount, setAmount] = useState(0)
   const [stripeToken, setStripeToken] = useState(null)
-  
+
   const publishable_key = "pk_test_51KGo0XHG7qACO4ZleQqv0XtS5T9ryIsssF6WRliEaQZOJ0sVZm5TSes4uQVS9bSuAKyjeysqnUD8DFgNDGxJF8oC002HOxI3YC"
 
   useEffect(() => {
     fetchEmployees();
   }, [page, limit]);
 
- 
+
   const fetchEmployees = async () => {
     try {
-           const response = await axios.get('https://server-wheat-xi.vercel.app/api/user/userList', {
+      const response = await axios.get('https://server-wheat-xi.vercel.app/api/user/userList', {
         params: { page, limit },
         withCredentials: true,
       });
@@ -71,37 +73,37 @@ const EmployeeList = () => {
 
   const onToken = async (token) => {
     setStripeToken(token)
-   
+
   };
 
 
-  useEffect(()=>{
-const sendMoney=async()=>{
-  try {
+  useEffect(() => {
+    const sendMoney = async () => {
+      try {
 
-    const response = await axios.post('https://server-wheat-xi.vercel.app/api/stripe/create', {
-      amount,
-      tokenId: stripeToken.id,
-    });
-    console.log(response.data);
-    toast.success(response?.data?.message);
-    setModalIsOpen(false);
-    fetchEmployees();
-  } catch (err) {
-    console.error("Payment failed", err.response);
-    toast.error(err.response.data.message || "Payment failed. Please try again.");
-  }
-}
+        const response = await axios.post('https://server-wheat-xi.vercel.app/api/stripe/create', {
+          amount,
+          tokenId: stripeToken.id,
+        });
+        console.log(response.data);
+        toast.success(response?.data?.message);
+        setModalIsOpen(false);
+        fetchEmployees();
+      } catch (err) {
+        console.error("Payment failed", err.response);
+        toast.error(err.response.data.message || "Payment failed. Please try again.");
+      }
+    }
 
-   stripeToken && sendMoney()
-  },[stripeToken])
+    stripeToken && sendMoney()
+  }, [stripeToken])
 
 
   return (
-    <div className='flex '>
-     
-      <div className="max-w-6xl mx-auto p-6 bg-white rounded-md ">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Employee List</h2>
+    <div className={`flex ${isDarkMode ? "bg-dark text-white" : "bg-white text-dark"}`}>
+
+      <div className="max-w-6xl mx-auto p-6  rounded-md ">
+        <h2 className="text-2xl font-semibold mb-4">Employee List</h2>
         <div className="overflow-x-auto ">
           <table className="w-full border border-gray-200 rounded-lg ">
             <thead className="bg-gray-100 text-gray-700">
@@ -117,7 +119,7 @@ const sendMoney=async()=>{
             </thead>
             <tbody>
               {employees.length > 0 && employees?.map((employee) => (
-                <tr key={employee._id} className="hover:bg-gray-50">
+                <tr key={employee._id} className="">
                   <td className="px-4 py-2">{employee.name}</td>
                   <td className="px-4 py-2">{employee.email}</td>
                   <td className="px-4 py-2">
@@ -134,7 +136,7 @@ const sendMoney=async()=>{
                   <td className="px-4 py-2">{employee?.bankAccountNo || "Not found"}</td>
                   <td className="px-4 py-2">${employee?.salary}</td>
                   <td className="px-4 py-2">
-                   <div className='flex flex-col gap-[1px]'>
+                    <div className='flex flex-col gap-[1px]'>
                       <button
                         onClick={() => openModal(employee)}
                         disabled={!employee.isVerified}
@@ -163,7 +165,7 @@ const sendMoney=async()=>{
                           Checkout
                         </StripeCheckout>
                       </button>
-                   </div>
+                    </div>
 
                   </td>
                   <td className="px-4 py-2">

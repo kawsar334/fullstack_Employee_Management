@@ -7,8 +7,10 @@ export const ThemeProvider = ({ children }) => {
     const [isDarkMode, setIsDarkMode] = useState(false); 
 
     const toggleTheme = () => {
-        setIsDarkMode((prevMode) => !prevMode);
-        document.documentElement.setAttribute("data-theme", !isDarkMode ? "dark" : "light");
+        // setIsDarkMode((prevMode) => !prevMode);
+        // document.documentElement.setAttribute("data-theme", !isDarkMode ? "dark" : "light");
+        setIsDarkMode(!isDarkMode);
+        // document.documentElement.setAttribute("data-theme", "dark");
     };
 
     return (

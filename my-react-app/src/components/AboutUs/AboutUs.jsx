@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 // Team member data
 const teamData = [
@@ -29,17 +30,18 @@ const teamData = [
 ];
 
 const Team = () => {
+     const { isDarkMode } = useContext(ThemeContext)
     return (
-        <section className="py-16 bg-white">
+        <section className={`py-16 ${isDarkMode ? "bg-dark" :"bg-white"}`}>
             <div className="container mx-auto px-6 text-center" data-aos="fade-up">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8">Meet Our Team</h2>
+                <h2 className={`text-3xl font-bold ${isDarkMode ? "text-white" :"text-gray-800"} mb-8`}>Meet Our Team</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {teamData.map((member) => (
                         <div key={member.id} className="bg-gray-100 p-6 rounded-lg shadow-lg" data-aos="zoom-in">
                             <img
                                 src={member.image}
                                 alt={member.name}
-                                className="w-32 h-32 border-2 border-text rounded-full mx-auto mb-4 object-cover"
+                                className="w-32 h-32 border-2 border-main rounded-full mx-auto mb-4 object-cover"
                             />
                             <h3 className="text-xl font-semibold text-main">{member.name}</h3>
                             <p className="text-gray-500 first-letter:text-text">{member.position}</p>

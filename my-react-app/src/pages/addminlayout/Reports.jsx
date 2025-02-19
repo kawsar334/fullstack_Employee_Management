@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "../../components/Loader";
 import Sidebar from "../../components/sidebar/Sidebar";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 const Reports = () => {
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
-
+   const { isDarkMode, toggleTheme } = useContext(ThemeContext)
     useEffect(() => {
         const fetchReports = async () => {
             setLoading(true);
@@ -34,13 +35,11 @@ const Reports = () => {
     }
 
     return (
-      
-
-        <div className="flex justify-start items-start ">
+        <div className={`flex justify-start items-start ${isDarkMode?"bg-dark text-white" :"bg-white text-dark"}`}>
             <Sidebar/>
-            <div className="min-h-screen bg-gray-100 py-8">
+            <div className="min-h-screen ml-5  py-8">
                 <div className="container mx-auto px-4">
-                    <h1 className="text-3xl font-bold text-center text-main mb-8">User Reports</h1>
+                    <h1 className="text-3xl font-bold text-center  mb-8">User Reports</h1>
                     {reports.length === 0 ? (
                         <p className="text-center text-gray-600">No reports found.</p>
                     ) : (

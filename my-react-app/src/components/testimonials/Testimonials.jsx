@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../../context/ThemeProvider";
 
 // Testimonial data
 const testimonialsData = [
@@ -33,7 +34,7 @@ const testimonialsData = [
 ];
 
 const Testimonials = () => {
-    // State to handle the current testimonial index
+      const { isDarkMode } = useContext(ThemeContext)
     const [currentIndex, setCurrentIndex] = useState(0);
     const nextTestimonial = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonialsData.length);
@@ -47,11 +48,11 @@ const Testimonials = () => {
     const currentTestimonial = testimonialsData[currentIndex];
 
     return (
-        <section className="py-16 bg-gray-50">
+        <section className={`py-16 ${isDarkMode ? "bg-dark text-white" :"bg-gray-50 "} `}>
             <div className="container mx-auto px-6 text-center">
-                <h2 className="text-3xl font-bold text-gray-800 mb-8">What Our Clients Say</h2>
+                <h2 className={`text-3xl font-bold ${isDarkMode ? "text-white" :"text-gray-800"} mb-8`}>What Our Clients Say</h2>
                 <div className="relative">
-                    <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto" data-aos="zoom-in">
+                    <div className="bg-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto transition-all duration-1000" data-aos="zoom-in">
                         <div className="flex justify-center mb-4">
                             <img
                                 src={currentTestimonial.avatar}
