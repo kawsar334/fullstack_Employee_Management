@@ -9,10 +9,6 @@
 
  -  [LIVE LINK](https://reliable-eclair-d8edc7.netlify.app/)   
 
-- **Frontend GitHub Repository**: [Frontend Repository Link](https://github.com/kawsar334/Employee_Management_Client) 
-
-- **Backend GitHub Repository**: [Backend Repository Link](https://github.com/kawsar334/Employee_Management_server)  
- 
 
 ---
 

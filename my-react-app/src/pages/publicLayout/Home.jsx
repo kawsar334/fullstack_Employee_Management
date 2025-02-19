@@ -12,10 +12,7 @@ import Newsletter from '../../components/Newsletter/Newsletter';
 import PerformanceReviews from '../../components/PerformanceReviews/PerformanceReviews';
 import EmployeeBenefits from '../../components/EmployeeBenefits/EmployeeBenefits';
 
-const Home = ({ user }) => {
-
-
-  
+const Home = () => {
 
   useEffect(() => {
     const getData = async () => {
